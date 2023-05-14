@@ -21,7 +21,11 @@ export interface CreateQuestDto {
   objectives: QuestObjective[];
 }
 
-export async function createQuest({ name, description, objectives }: CreateQuestDto) {}
+export async function createQuest({ name, description, objectives }: CreateQuestDto) {
+  const client = await clientPromise;
+  const collection = client.db(process.env.MONGODB_NAME).collection('quests');
+
+}
 
 export async function getAllQuests(): Promise<QuestProps | null> {
   const client = await clientPromise;
