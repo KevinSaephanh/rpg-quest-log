@@ -1,4 +1,4 @@
-import clientPromise from '../mongodb';
+import { getCollection } from '../get-collection';
 
 export interface QuestProps {
   name: string;
@@ -22,19 +22,15 @@ export interface CreateQuestDto {
 }
 
 export async function createQuest({ name, description, objectives }: CreateQuestDto) {
-  const client = await clientPromise;
-  const collection = client.db(process.env.MONGODB_NAME).collection('quests');
-
+  const collection = await getCollection('quests');
 }
 
-export async function getAllQuests(): Promise<QuestProps | null> {
-  const client = await clientPromise;
-  const collection = client.db(process.env.MONGODB_NAME).collection('quests');
-  return await collection.find();
+export async function getAllQuests() {
+  const collection = await getCollection('quests');
+  // return await collection.aggregate().toArray();
 }
 
 export async function updateQuest(name: string, placeholder: string) {
-  const client = await clientPromise;
-  const collection = client.db('test').collection('quests');
+  const collection = await getCollection('quests');
   return await collection.updateOne({ name }, { $set: { placeholder } });
 }
