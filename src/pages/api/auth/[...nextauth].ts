@@ -1,16 +1,41 @@
-import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
 import NextAuth from 'next-auth';
-import clientPromise from 'src/lib/mongodb';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { signin } from 'src/lib/utils/users';
+import prisma from 'src/lib/utils/prisma-client';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export default NextAuth({
-  adapter: MongoDBAdapter(clientPromise),
-  providers: [],
-  secret: process.env.JWT_SECRET,
-  jwt: {
+const authHandler = async (req: NextApiRequest, res: NextApiResponse) => {
+  return await NextAuth(req, res, {
+    adapter: PrismaAdapter(prisma),
+    providers: [
+      CredentialsProvider({
+        name: 'Credentials',
+        credentials: {
+          email: {
+            label: 'Email',
+            type: 'email',
+          },
+          password: {
+            label: 'Password',
+            type: 'password',
+          },
+        },
+        async authorize(credentials) {
+          if (!credentials) throw new Error(`Credentials not provided!`);
+          return await signin(credentials);
+        },
+      }),
+    ],
+    pages: {
+      signIn: '/signin',
+    },
+    session: {
+      strategy: 'jwt',
+      maxAge: 60 * 60,
+    },
     secret: process.env.JWT_SECRET,
-    maxAge: +process.env.JWT_AGE!,
-  },
-  session: {
-    strategy: 'jwt',
-  },
-});
+  });
+};
+
+export default authHandler;
