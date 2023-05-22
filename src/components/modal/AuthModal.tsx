@@ -12,16 +12,21 @@ export const AuthModal: React.FC<AuthModalProps> = ({ modalType }) => {
     setIsSignup(!isSignup);
   };
 
+  const onSubmit = () => {
+    if (isSignup) console.log('signup');
+    else console.log('signin');
+  };
+
   return (
     <dialog>
       <span>{modalType.toUpperCase()}</span>
       {isSignup ? (
         <>
-          <label>Email</label>
+          <label>Username</label>
           <input></input>
         </>
       ) : null}
-      <label>Username</label>
+      <label>Email</label>
       <input></input>
       <label>Password</label>
       <input></input>
