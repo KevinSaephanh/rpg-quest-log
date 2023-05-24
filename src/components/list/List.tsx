@@ -19,7 +19,7 @@ export const List = <T,>({
     {items.map((item, index) => (
       <li key={index} className={`${itemClasses} flex justify-between`}>
         {getItem(item, index)}
-        {handleRemove ? (
+        {handleRemove && (
           <svg
             className='h-6 w-6'
             xmlns='http://www.w3.org/2000/svg'
@@ -36,7 +36,7 @@ export const List = <T,>({
               d='M6 18L18 6M6 6l12 12'
             />
           </svg>
-        ) : null}
+        )}
       </li>
     ))}
   </ul>

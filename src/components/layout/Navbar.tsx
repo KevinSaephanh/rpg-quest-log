@@ -1,8 +1,16 @@
 import Image from 'next/image';
 import React from 'react';
 import { NavLink } from './NavLink';
+import { MedievalSharp } from 'next/font/google';
+import { AuthModal } from '../modal/AuthModal';
+
+const medieval = MedievalSharp({
+  subsets: ['latin'],
+  weight: '400',
+});
 
 const Navbar: React.FC = () => {
+  const [authType, setAuthType] = React.useState<'signup' | 'signin' | null>(null);
   const isAuth = false;
 
   return (
@@ -11,24 +19,16 @@ const Navbar: React.FC = () => {
         <div>
           <Image src='/assets/scroll.png' alt='#' height={30} width={40} />
         </div>
-        <ul className='flex flex-row list-none p-2 md:space-x-8 md:mt-0'>
+        <ul className={`flex flex-row list-none p-2 md:space-x-8 md:mt-0 ${medieval.className}`}>
           {!isAuth ? (
             <>
               <NavLink
                 label='Signin'
                 href='#'
-                styles='pr-2'
-                handleClick={() => {
-                  console.log('Signin');
-                }}
+                styles='pr-4 md:pr-2'
+                handleClick={() => setAuthType('signin')}
               />
-              <NavLink
-                label='Signup'
-                href='#'
-                handleClick={() => {
-                  console.log('Signup');
-                }}
-              />
+              <NavLink label='Signup' href='#' handleClick={() => setAuthType('signup')} />
             </>
           ) : (
             <>
@@ -43,6 +43,8 @@ const Navbar: React.FC = () => {
           )}
         </ul>
       </div>
+
+      {authType && <AuthModal modalType={authType} setAuthType={setAuthType} />}
     </header>
   );
 };

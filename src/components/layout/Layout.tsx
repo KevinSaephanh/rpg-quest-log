@@ -8,7 +8,7 @@ type LayoutProps = {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className='flex h-screen flex-col justify-between'>
+    <div className='flex h-screen flex-col justify-between text-gray-950 bg-neutral-50'>
       <Navbar />
       <main role='main' className='p-5 my-5 flex-auto'>
         {children}
