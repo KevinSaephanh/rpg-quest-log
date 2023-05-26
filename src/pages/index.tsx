@@ -1,7 +1,7 @@
 import { MedievalSharp } from 'next/font/google';
 import React from 'react';
-import { ModalWrapper } from 'src/components/modal/ModalWrapper';
 import { SignupModal } from 'src/components/modal/SignupModal';
+import { ModalContext } from 'src/context/modal/context';
 
 const medieval = MedievalSharp({
   subsets: ['latin'],
@@ -9,7 +9,7 @@ const medieval = MedievalSharp({
 });
 
 export default function Home() {
-  const [showModal, setShowModal] = React.useState(false);
+  const modalContext = React.useContext(ModalContext);
 
   return (
     <>
@@ -18,16 +18,14 @@ export default function Home() {
         <span className='text-xl'>Create and manage quests with customizable logs</span>
         <button
           className='btn w-20 mt-4 hover:opacity-80 mx-auto'
-          onClick={() => setShowModal(true)}
+          onClick={() => {
+            modalContext.openModal('Signup', <SignupModal />);
+          }}
         >
           Start &#8594;
         </button>
       </section>
       <section className=''>CONTENT HERE</section>
-
-      <ModalWrapper show={showModal} setShow={setShowModal}>
-        <SignupModal switchModal={() => {}} />
-      </ModalWrapper>
     </>
   );
 }

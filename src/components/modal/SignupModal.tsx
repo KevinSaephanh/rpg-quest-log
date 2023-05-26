@@ -1,18 +1,13 @@
 import React from 'react';
 import { InputField } from '../form/InputField';
 
-type SignupModalProps = {
-  switchModal: Function;
-};
-
-export const SignupModal: React.FC<SignupModalProps> = ({ switchModal }) => {
+export const SignupModal: React.FC = () => {
   const [inputs, setInputs] = React.useState({
     email: '',
     username: '',
     password: '',
     confirmPassword: '',
   });
-  const [submitMessage, setSubmitMessage] = React.useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -77,7 +72,7 @@ export const SignupModal: React.FC<SignupModalProps> = ({ switchModal }) => {
       </button>
       <span className='mt-2 mb-4'>
         Already have an account? Login{' '}
-        <a className='hyperlink' onClick={switchModal()}>
+        <a className='hyperlink' onClick={() => {}}>
           here
         </a>
       </span>

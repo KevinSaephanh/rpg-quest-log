@@ -3,22 +3,12 @@ import React from 'react';
 import { NavLink } from './NavLink';
 import { SignupModal } from '../modal/SignupModal';
 import { SigninModal } from '../modal/SigninModal';
-import { ModalWrapper } from '../modal/ModalWrapper';
+import { ModalContext } from 'src/context/modal/context';
+import { useAuth } from 'src/hooks/useAuth';
 
 const Navbar: React.FC = () => {
-  const [showSignupModal, setShowSignupModal] = React.useState(false);
-  const [showSigninModal, setShowSigninModal] = React.useState(false);
-  const isAuth = false;
-
-  const switchModal = () => {
-    if (showSignupModal) {
-      setShowSignupModal(false);
-      setShowSigninModal(true);
-    } else {
-      setShowSignupModal(true);
-      setShowSigninModal(false);
-    }
-  };
+  const modalContext = React.useContext(ModalContext);
+  const { status } = useAuth();
 
   return (
     <header className='px-2 md:px-6 pt-2 md:pt-4'>
@@ -27,19 +17,23 @@ const Navbar: React.FC = () => {
           <Image src='/assets/scroll.png' alt='#' height={30} width={40} />
         </div>
         <ul className='flex flex-row list-none p-2 md:space-x-8 md:mt-0'>
-          {!isAuth ? (
+          {status !== 'authenticated' ? (
             <>
               <NavLink
                 label='Signin'
                 href='#'
                 styles='pr-4 md:pr-2'
-                handleClick={() => setShowSignupModal(true)}
+                handleClick={() => {
+                  modalContext.openModal('Signup', <SignupModal />);
+                }}
               />
               <NavLink
                 styles='btn'
                 label='Signup'
                 href='#'
-                handleClick={() => setShowSigninModal(true)}
+                handleClick={() => {
+                  modalContext.openModal('Signin', <SigninModal />);
+                }}
               />
             </>
           ) : (
@@ -62,13 +56,6 @@ const Navbar: React.FC = () => {
           )}
         </ul>
       </div>
-
-      <ModalWrapper show={showSignupModal} setShow={setShowSignupModal}>
-        <SignupModal switchModal={switchModal} />
-      </ModalWrapper>
-      <ModalWrapper show={showSigninModal} setShow={setShowSigninModal}>
-        <SigninModal switchModal={switchModal} />
-      </ModalWrapper>
     </header>
   );
 };

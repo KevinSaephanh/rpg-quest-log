@@ -1,30 +1,22 @@
 import React from 'react';
+import { ModalContext } from 'src/context/modal/context';
 
-type SigninModalProps = {
-  show: boolean;
-  setShow: Function;
-  children: React.ReactNode;
-  title?: string;
-  styles?: string;
-};
-
-export const ModalWrapper: React.FC<SigninModalProps> = ({
-  show,
-  setShow,
-  children,
-  title,
-  styles,
-}) => {
+export const ModalWrapper: React.FC = () => {
+  const { modalContent, modalTitle, closeModal } = React.useContext(ModalContext);
   const modalErrorFromState = null;
 
   return (
-    <div className={`${!show && 'hidden'} ${styles} modal`}>
-      <button className='ml-auto mr-0 pt-2' onClick={() => setShow(false)}>
-        CLOSE BUTTON
-      </button>
-      {title && <h2 className='text-center font-bold py-2'>{title}</h2>}
-      {modalErrorFromState && <span className='error-message'>{modalErrorFromState}</span>}
-      {children}
-    </div>
+    <>
+      {modalContent && (
+        <>
+          <button className='ml-auto mr-0 pt-2' onClick={closeModal}>
+            CLOSE BUTTON
+          </button>
+          <h2 className='text-center font-bold py-2'>{modalTitle}</h2>
+          {modalErrorFromState && <span className='error-message'>{modalErrorFromState}</span>}
+          {modalContent}
+        </>
+      )}
+    </>
   );
 };
