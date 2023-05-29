@@ -1,7 +1,10 @@
 import React from 'react';
 import { InputField } from '../form/InputField';
+import { ModalContext } from 'src/context/modal/context';
+import { SigninModal } from './SigninModal';
 
 export const SignupModal: React.FC = () => {
+  const modalContext = React.useContext(ModalContext);
   const [inputs, setInputs] = React.useState({
     email: '',
     username: '',
@@ -67,12 +70,22 @@ export const SignupModal: React.FC = () => {
         onChange={handleChange}
         required
       />
-      <button type='submit' disabled={submitDisabled()} onClick={handleSubmit}>
+      <button
+        className='w-20 mx-auto'
+        type='submit'
+        disabled={submitDisabled()}
+        onClick={handleSubmit}
+      >
         Submit
       </button>
       <span className='mt-2 mb-4'>
         Already have an account? Login{' '}
-        <a className='hyperlink' onClick={() => {}}>
+        <a
+          className='hyperlink'
+          onClick={() => {
+            modalContext.openModal('Signin', <SigninModal />);
+          }}
+        >
           here
         </a>
       </span>

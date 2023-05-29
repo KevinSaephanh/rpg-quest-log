@@ -21,13 +21,9 @@ export const InputField: React.FC<InputFieldProps> = ({
 }) => {
   return (
     <>
-      {label && (
-        <label className='pb-2' htmlFor='input-field'>
-          {label}
-        </label>
-      )}
+      {label && <label htmlFor='input-field'>{label}</label>}
       <input
-        className='mb-2 p-2'
+        className='mb-2 p-2 rounded'
         type={type}
         value={value}
         name={name}

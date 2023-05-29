@@ -5,6 +5,7 @@ import { SignupModal } from '../modal/SignupModal';
 import { SigninModal } from '../modal/SigninModal';
 import { ModalContext } from 'src/context/modal/context';
 import { useAuth } from 'src/hooks/useAuth';
+import { ModalWrapper } from '../modal/ModalWrapper';
 
 const Navbar: React.FC = () => {
   const modalContext = React.useContext(ModalContext);
@@ -28,7 +29,7 @@ const Navbar: React.FC = () => {
                 }}
               />
               <NavLink
-                styles='btn'
+                styles='btn p-2 rounded'
                 label='Signup'
                 href='#'
                 handleClick={() => {
@@ -56,6 +57,8 @@ const Navbar: React.FC = () => {
           )}
         </ul>
       </div>
+
+      <ModalWrapper />
     </header>
   );
 };
