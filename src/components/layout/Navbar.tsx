@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
   const { status } = useAuth();
 
   return (
-    <header className='px-2 md:px-6 pt-2 md:pt-4'>
+    <header className='px-2 md:px-6 py-2 bg-slate-900'>
       <div className='flex flex-wrap items-center justify-between'>
         <div>
           <Image src='/assets/scroll.png' alt='#' height={30} width={40} />
@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
                 href='#'
                 styles='pr-4 md:pr-2'
                 handleClick={() => {
-                  modalContext.openModal('Signup', <SignupModal />);
+                  modalContext.openModal('Signin', <SigninModal />);
                 }}
               />
               <NavLink
@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
                 label='Signup'
                 href='#'
                 handleClick={() => {
-                  modalContext.openModal('Signin', <SigninModal />);
+                  modalContext.openModal('Signup', <SignupModal />);
                 }}
               />
             </>

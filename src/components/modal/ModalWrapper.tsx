@@ -3,7 +3,7 @@ import { ModalContext } from 'src/context/modal/context';
 
 export const ModalWrapper: React.FC = () => {
   const { modalContent, modalTitle, closeModal } = React.useContext(ModalContext);
-  const modalErrorFromState = null;
+  const modalErrorFromState = null; // TODO: Add to modal context
 
   return (
     <>

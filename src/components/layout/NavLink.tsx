@@ -21,7 +21,7 @@ export const NavLink: React.FC<NavLinkProps> = ({
       href={href}
       onClick={handleClick}
       target={target}
-      className={`link-item flex items-center font-bold text-xl hover:opacity-70 ${styles}`}
+      className={`text-white flex items-center font-bold text-xl hover:opacity-70 ${styles}`}
       aria-current='page'
     >
       {label}

@@ -2,6 +2,7 @@ import React from 'react';
 import { InputField } from '../form/InputField';
 import { ModalContext } from 'src/context/modal/context';
 import { SignupModal } from './SignupModal';
+import { FormWrapper } from '../form/FormWrapper';
 
 export const SigninModal: React.FC = () => {
   const modalContext = React.useContext(ModalContext);
@@ -26,36 +27,30 @@ export const SigninModal: React.FC = () => {
 
   return (
     <>
-      <InputField
-        label='Email'
-        type='email'
-        name='email'
-        placeholder='email'
-        minLength={5}
-        maxLength={25}
-        value={inputs.email}
-        onChange={handleChange}
-        required
-      />
-      <InputField
-        label='Password'
-        type='password'
-        name='password'
-        placeholder='password'
-        minLength={8}
-        maxLength={25}
-        value={inputs.password}
-        onChange={handleChange}
-        required
-      />
-      <button
-        className='w-20 mx-auto'
-        type='submit'
-        disabled={submitDisabled()}
-        onClick={handleSubmit}
-      >
-        Submit
-      </button>
+      <FormWrapper submitDisabled={submitDisabled()} handleSubmit={handleSubmit}>
+        <InputField
+          label='Email'
+          type='email'
+          name='email'
+          placeholder='email'
+          minLength={5}
+          maxLength={25}
+          value={inputs.email}
+          onChange={handleChange}
+          required
+        />
+        <InputField
+          label='Password'
+          type='password'
+          name='password'
+          placeholder='password'
+          minLength={8}
+          maxLength={25}
+          value={inputs.password}
+          onChange={handleChange}
+          required
+        />
+      </FormWrapper>
       <span className='mt-2 mb-4'>
         Don&rsquo;t have an account? Signup{' '}
         <a
