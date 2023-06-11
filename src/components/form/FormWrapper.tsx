@@ -1,6 +1,6 @@
 import React from 'react';
 
-type FormProps = {
+type FormWrapperProps = {
   styles?: string;
   children: React.ReactNode;
   submitDisabled?: boolean;
@@ -8,7 +8,7 @@ type FormProps = {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
-export const FormWrapper: React.FC<FormProps> = ({
+export const FormWrapper: React.FC<FormWrapperProps> = ({
   styles,
   children,
   submitDisabled,

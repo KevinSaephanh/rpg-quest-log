@@ -12,11 +12,9 @@ const Navbar: React.FC = () => {
   const { status } = useAuth();
 
   return (
-    <header className='px-2 md:px-6 py-2 bg-slate-900'>
+    <header className='bg-indigo-900 px-2 md:px-6 py-2'>
       <div className='flex flex-wrap items-center justify-between'>
-        <div>
-          <Image src='/assets/scroll.png' alt='#' height={30} width={40} />
-        </div>
+        <Image src='/assets/rpg-scroll.png' alt='#' height={30} width={40} />
         <ul className='flex flex-row list-none p-2 md:space-x-8 md:mt-0'>
           {status !== 'authenticated' ? (
             <>
