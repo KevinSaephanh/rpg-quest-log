@@ -3,6 +3,7 @@ import { InputField } from '../form/InputField';
 import { ModalContext } from 'src/context/modal/context';
 import { SignupModal } from './SignupModal';
 import { FormWrapper } from '../form/FormWrapper';
+import axios from 'axios';
 
 export const SigninModal: React.FC = () => {
   const modalContext = React.useContext(ModalContext);
@@ -16,8 +17,8 @@ export const SigninModal: React.FC = () => {
     setInputs({ ...inputs, [name]: value });
   };
 
-  const handleSubmit = () => {
-    console.log('signin');
+  const handleSubmit = async () => {
+    const user = await axios.post('/api/auth/signin', inputs);
   };
 
   const submitDisabled = () => {
