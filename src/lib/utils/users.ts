@@ -38,8 +38,7 @@ export const signin = async ({ email, password }: LoginDto) => {
 
     if (!compareSync(password, userPassword)) throw new Error(`Passwords do not match!`);
 
-    const token = '1234';
-    return { user, token };
+    return user;
   } catch (error) {
     throw new Error(error as string);
   }

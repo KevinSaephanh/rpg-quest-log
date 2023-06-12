@@ -31,10 +31,9 @@ const authHandler = async (req: NextApiRequest, res: NextApiResponse) => {
       signIn: '/signin',
     },
     session: {
-      strategy: 'jwt',
       maxAge: 60 * 60,
     },
-    secret: process.env.JWT_SECRET,
+    secret: process.env.SESSION_SECRET,
   });
 };
 
