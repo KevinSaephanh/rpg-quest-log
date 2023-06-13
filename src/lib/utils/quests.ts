@@ -23,11 +23,13 @@ export interface QuestObjective {
   isComplete: boolean;
 }
 
-export const createQuest = async ({ objectives, ...partialQuest }: CreateQuestDto) => {
-  const quest = await prisma.quest.create({
-    data: { ...partialQuest, objectives },
+export const createQuest = async (
+  userId: string,
+  { objectives, ...partialQuest }: CreateQuestDto
+) => {
+  return await prisma.quest.create({
+    data: { ...partialQuest, userId, objectives: objectives as any[] },
   });
-  return quest;
 };
 
 export const findUserQuests = async (userId: string) => {
