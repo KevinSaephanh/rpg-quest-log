@@ -4,6 +4,7 @@ import { ModalContext } from 'src/context/modal/context';
 import { SignupModal } from './SignupModal';
 import { FormWrapper } from '../form/FormWrapper';
 import axios from 'axios';
+import { signIn } from 'next-auth/react';
 
 export const SigninModal: React.FC = () => {
   const modalContext = React.useContext(ModalContext);
@@ -20,7 +21,7 @@ export const SigninModal: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const user = await axios.post('/api/auth/signin', inputs);
+    const user = await signIn('credentials');
     console.log(user);
   };
 

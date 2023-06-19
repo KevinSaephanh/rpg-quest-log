@@ -32,14 +32,31 @@ export const signup = async ({ email, username, password }: SignupDto) => {
 
 export const signin = async ({ email, password }: LoginDto) => {
   try {
-    console.log(email, password);
     const { password: userPassword, ...user } = await prisma.user.findUniqueOrThrow({
       where: { email },
     });
 
-    console.log(user);
-
     if (!compareSync(password, userPassword)) throw new Error(`Passwords do not match!`);
+
+    return user;
+  } catch (error) {
+    throw new Error(error as string);
+  }
+};
+
+export const findAllUsers = async () => {
+  try {
+    return await prisma.user.findMany();
+  } catch (error) {
+    throw new Error(error as string);
+  }
+};
+
+export const findUserById = async (id: string) => {
+  try {
+    const user = await prisma.user.findFirst({ where: { id } });
+
+    if (!user) throw new Error(`User not found!`);
 
     return user;
   } catch (error) {

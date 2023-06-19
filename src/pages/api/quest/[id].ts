@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { findQuestById } from 'src/lib/utils/quests';
 
-export default async function getByIdHandler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handle(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
     res.status(405).json({ message: 'Method Not Allowed' });
     return;
@@ -8,7 +9,7 @@ export default async function getByIdHandler(req: NextApiRequest, res: NextApiRe
 
   try {
     const { id } = req.query;
-    const quest = await Promise.resolve();
+    const quest = await findQuestById(id as string);
     res.status(200).json({ quest });
   } catch (error) {
     res.status(401).json({ message: error });

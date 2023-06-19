@@ -27,9 +27,6 @@ const authHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       }),
     ],
-    pages: {
-      signIn: '/signin',
-    },
     session: {
       maxAge: 60 * 60,
     },

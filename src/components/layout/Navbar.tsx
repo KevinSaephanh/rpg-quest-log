@@ -7,6 +7,7 @@ import { ModalContext } from 'src/context/modal/context';
 import { useAuth } from 'src/hooks/useAuth';
 import { ModalWrapper } from '../modal/ModalWrapper';
 import { useRouter } from 'next/router';
+import { signOut } from 'next-auth/react';
 
 const Navbar: React.FC = () => {
   const router = useRouter();
@@ -53,13 +54,7 @@ const Navbar: React.FC = () => {
                   console.log('Quests');
                 }}
               />
-              <NavLink
-                label='Signout'
-                href='#'
-                handleClick={() => {
-                  console.log('Signout');
-                }}
-              />
+              <NavLink label='Signout' href='#' handleClick={() => signOut()} />
             </>
           )}
         </ul>
