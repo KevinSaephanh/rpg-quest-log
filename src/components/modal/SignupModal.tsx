@@ -19,8 +19,11 @@ export const SignupModal: React.FC = () => {
     setInputs({ ...inputs, [name]: value });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     const user = await axios.post('/api/auth/signup', inputs);
+    console.log(user);
   };
 
   const submitDisabled = () => {

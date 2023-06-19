@@ -17,8 +17,11 @@ export const SigninModal: React.FC = () => {
     setInputs({ ...inputs, [name]: value });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     const user = await axios.post('/api/auth/signin', inputs);
+    console.log(user);
   };
 
   const submitDisabled = () => {
@@ -38,6 +41,7 @@ export const SigninModal: React.FC = () => {
           maxLength={25}
           value={inputs.email}
           onChange={handleChange}
+          inputStyles='mb-6'
           required
         />
         <InputField

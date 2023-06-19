@@ -7,10 +7,8 @@ export default async function signinHandler(req: NextApiRequest, res: NextApiRes
     return;
   }
 
-  const { email, password } = req.body;
-
   try {
-    const user = await signin({ email, password });
+    const user = await signin(req.body);
     res.status(200).json({ user });
   } catch (error) {
     res.status(401).json({ message: error });

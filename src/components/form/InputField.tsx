@@ -3,6 +3,8 @@ import React from 'react';
 type InputFieldProps = {
   value: string;
   label?: string;
+  labelStyles?: string;
+  inputStyles?: string;
   name?: string;
   placeholder?: string;
   type: 'text' | 'email' | 'password';
@@ -14,6 +16,8 @@ type InputFieldProps = {
 export const InputField: React.FC<InputFieldProps> = ({
   value,
   label,
+  labelStyles,
+  inputStyles,
   name,
   placeholder,
   type,
@@ -21,9 +25,13 @@ export const InputField: React.FC<InputFieldProps> = ({
 }) => {
   return (
     <>
-      {label && <label htmlFor='input-field'>{label}</label>}
+      {label && (
+        <label htmlFor='input-field' className={`pb-2 ${labelStyles}`}>
+          {label}
+        </label>
+      )}
       <input
-        className='mb-2 p-2 rounded'
+        className={`rounded text-black p-2 mb-2 ${inputStyles}`}
         type={type}
         value={value}
         name={name}

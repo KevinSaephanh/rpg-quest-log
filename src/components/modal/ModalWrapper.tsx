@@ -2,8 +2,7 @@ import React from 'react';
 import { ModalContext } from 'src/context/modal/context';
 
 export const ModalWrapper: React.FC = () => {
-  const { modalContent, modalTitle, closeModal } = React.useContext(ModalContext);
-  const modalErrorFromState = null; // TODO: Add to modal context
+  const { modalContent, modalTitle, modalError, closeModal } = React.useContext(ModalContext);
 
   return (
     <>
@@ -28,7 +27,7 @@ export const ModalWrapper: React.FC = () => {
             </svg>
           </button>
           <h2 className='py-2'>{modalTitle}</h2>
-          {modalErrorFromState && <span className='error-message'>{modalErrorFromState}</span>}
+          {modalError.length > 0 && <span className='error-message'>{modalError}</span>}
           {modalContent}
         </div>
       )}

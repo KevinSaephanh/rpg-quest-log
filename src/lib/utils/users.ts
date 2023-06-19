@@ -32,9 +32,12 @@ export const signup = async ({ email, username, password }: SignupDto) => {
 
 export const signin = async ({ email, password }: LoginDto) => {
   try {
+    console.log(email, password);
     const { password: userPassword, ...user } = await prisma.user.findUniqueOrThrow({
       where: { email },
     });
+
+    console.log(user);
 
     if (!compareSync(password, userPassword)) throw new Error(`Passwords do not match!`);
 

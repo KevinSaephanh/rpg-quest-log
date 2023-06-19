@@ -6,15 +6,24 @@ import { SigninModal } from '../modal/SigninModal';
 import { ModalContext } from 'src/context/modal/context';
 import { useAuth } from 'src/hooks/useAuth';
 import { ModalWrapper } from '../modal/ModalWrapper';
+import { useRouter } from 'next/router';
 
 const Navbar: React.FC = () => {
+  const router = useRouter();
   const modalContext = React.useContext(ModalContext);
   const { status } = useAuth();
 
   return (
     <header className='bg-indigo-900 px-2 md:px-6 py-2'>
       <div className='flex flex-wrap items-center justify-between'>
-        <Image src='/assets/rpg-scroll.png' alt='#' height={30} width={40} />
+        <Image
+          src='/assets/rpg-scroll.png'
+          alt='#'
+          className='cursor-pointer'
+          onClick={() => router.push('/')}
+          height={30}
+          width={40}
+        />
         <ul className='flex flex-row list-none p-2 md:space-x-8 md:mt-0'>
           {status !== 'authenticated' ? (
             <>

@@ -10,6 +10,7 @@ type ModalProviderProps = {
 export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   const [modalTitle, setModalTitle] = React.useState('');
   const [modalContent, setModalContent] = React.useState<React.ReactNode>(null);
+  const [modalError, setModalError] = React.useState('');
 
   const openModal = (title: string, content: React.ReactNode) => {
     setModalTitle(title);
@@ -19,11 +20,13 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   const closeModal = () => {
     setModalTitle('');
     setModalContent(null);
+    setModalError('');
   };
 
   const value: ModalState = {
     modalTitle,
     modalContent,
+    modalError,
     openModal,
     closeModal,
   };

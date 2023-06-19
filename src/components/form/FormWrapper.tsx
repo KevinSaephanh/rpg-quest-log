@@ -18,7 +18,7 @@ export const FormWrapper: React.FC<FormWrapperProps> = ({
   return (
     <form onSubmit={handleSubmit} className={`flex flex-col justify-between ${styles}`}>
       {children}
-      <button className='w-20 mx-auto' type='submit' disabled={submitDisabled}>
+      <button className='w-20 mx-auto mt-4' type='submit' disabled={submitDisabled}>
         {submitButtonText}
       </button>
     </form>
