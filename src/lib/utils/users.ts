@@ -1,5 +1,5 @@
 import { compareSync, hashSync } from 'bcrypt';
-import prisma from './prisma-client';
+import { prisma } from './prisma-client';
 
 export interface SignupDto {
   email: string;
